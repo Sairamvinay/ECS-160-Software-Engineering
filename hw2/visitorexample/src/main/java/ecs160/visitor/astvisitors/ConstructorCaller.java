@@ -16,7 +16,7 @@ public class ConstructorCaller extends ASTVisitor {
 	public boolean visit(ClassInstanceCreation node) {
 
 		//System.out.println(node.getType().toString());
-		if (node.getType().toString().equals(className)) {
+		if (node.resolveConstructorBinding().isConstructor() && node.getType().toString().equals(className)) {
 			insideIfClassCreation = true;
 			
 		}
