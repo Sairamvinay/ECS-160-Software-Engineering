@@ -11,7 +11,7 @@ public class Grade1A extends ASTVisitor{
 	
 	
 	public Grade1A(String Cname) {
-		;
+		grade = false;
 	
 	}
 	@Override
@@ -27,7 +27,7 @@ public class Grade1A extends ASTVisitor{
 				}
 			}
 		}
-		grade = false;
+		
 		return false;
 	}
 	public boolean getGrade() {

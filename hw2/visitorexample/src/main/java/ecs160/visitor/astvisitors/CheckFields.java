@@ -1,6 +1,5 @@
 package ecs160.visitor.astvisitors;
 
-import java.util.List;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.FieldDeclaration;

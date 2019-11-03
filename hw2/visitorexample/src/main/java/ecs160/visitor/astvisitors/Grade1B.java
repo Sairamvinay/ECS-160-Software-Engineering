@@ -9,6 +9,7 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 public class Grade1B extends ASTVisitor{
 	private String className;
 	private boolean grade = false;
+
 	public Grade1B(String Cname) {
 		className = Cname;
 		
@@ -26,7 +27,7 @@ public class Grade1B extends ASTVisitor{
 			boolean returnsType = false;
 			
 			
-			if (node.getReturnType2() != null && node.getReturnType2().toString().contentEquals(className)) {
+			if (node.getReturnType2() != null && node.getReturnType2().toString().equals(className)) {
 				returnsType = true;
 			}
 			

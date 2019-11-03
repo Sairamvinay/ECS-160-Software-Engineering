@@ -61,7 +61,7 @@ public class SingletonCheckerVisitor {
     	Inst.isGradeA = gradeA.getGrade();
     	Inst.isGradeB = gradeB.getGrade();
     	Inst.isGradeC = gradeC.getGrade();
-    	Inst.isGradeD = gradeD.getGrade();
+    	Inst.isGradeD = gradeD.getGrade() && gradeA.getGrade() && gradeB.getGrade();
     	
     	return Inst;
     	

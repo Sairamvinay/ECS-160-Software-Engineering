@@ -5,6 +5,7 @@ import org.eclipse.jdt.core.dom.MethodInvocation;
 
 public class CorrectCaller extends ASTVisitor {
 	
+	@SuppressWarnings("unused")
 	private String abstractName;
 	private String methodName;
 	private String VarName;
@@ -13,6 +14,7 @@ public class CorrectCaller extends ASTVisitor {
 		abstractName = Cname;
 		this.methodName = methodName;
 		VarName = Vname;
+		foundMatch = false;
 		
 	}
 	
@@ -26,12 +28,12 @@ public class CorrectCaller extends ASTVisitor {
 				
 				
 				
-//				System.out.println(methodName + " is the method name");
-//				System.out.println("The method is called by " + node.getExpression().toString());
-//				System.out.println("The variable name I need to check for is "+ VarName);
+				//System.out.println(methodName + " is the method name");
+				//System.out.println("The method is called by " + node.getExpression().toString());
+				//System.out.println("The variable name I need to check for is "+ VarName);
 				
-				if (node.getExpression().toString().equals(VarName)) {
-					//System.out.println("Match Found!");
+				if (!foundMatch && node.getExpression().toString().equals(VarName)) {
+					
 					foundMatch = true;
 				}
 				

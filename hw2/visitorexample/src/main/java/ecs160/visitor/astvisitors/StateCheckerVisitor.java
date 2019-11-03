@@ -64,7 +64,7 @@ public class StateCheckerVisitor {
 		cu1.accept(CF);
 		
 		String VarName = CF.getVarName();
-		Grade2B GradeB = new Grade2B(abstractName,VarName);
+		Grade2B GradeB = new Grade2B(abstractName,VarName,mc2.getMethods());
 		
 		cu1.accept(GradeB);
 		
