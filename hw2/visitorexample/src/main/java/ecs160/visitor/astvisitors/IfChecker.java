@@ -5,11 +5,12 @@ import org.eclipse.jdt.core.dom.IfStatement;
 //import org.eclipse.jdt.core.dom.MethodDeclaration;
 //import org.eclipse.jdt.core.dom.MethodInvocation;
 
-public class ConstructorIfChecker extends ASTVisitor {
+public class IfChecker extends ASTVisitor {
 	
 	private String className;
 	private boolean insideIf;
-	public ConstructorIfChecker(String Cname) {
+	
+	public IfChecker(String Cname) {
 		className = Cname;
 		insideIf = false;
 	}
@@ -17,7 +18,9 @@ public class ConstructorIfChecker extends ASTVisitor {
 	@Override
 	public boolean visit(IfStatement node) {
 		
-		ConstructorCaller ConCall = new ConstructorCaller(className);
+		
+		
+		ConstructorCaller ConCall = new ConstructorCaller(className); //need to check for the only one call INSIDE IF statement
 		node.accept(ConCall);
 		insideIf = ConCall.getBool();
 		return false;

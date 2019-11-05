@@ -22,9 +22,8 @@ public class SingletonCheckerVisitor {
 	private SingletonCheckerVisitor() {
 		;
 	}
-	public static SingletonCheckerVisitor setUpGrader(String sourceFile, String className) {
-		// TODO Auto-generated method stub
-	    SingletonCheckerVisitor Inst = new SingletonCheckerVisitor();
+	
+	private static CompilationUnit fileParser(String sourceFile) {
 		File file = new File(sourceFile);
 		String text = "";
 		try {
@@ -48,20 +47,34 @@ public class SingletonCheckerVisitor {
     	parser.setUnitName(file.getAbsolutePath()); //Load in the absolute path of the file to parse
     	CompilationUnit cu = (CompilationUnit) parser.createAST(null); //Create the tree and link to the root node.
     	
+    	return cu;
+	}
+	
+	public static SingletonCheckerVisitor setUpGrader(String sourceFile, String className) {
+		// TODO Auto-generated method stub
+	    SingletonCheckerVisitor Inst = new SingletonCheckerVisitor();
+		
+    	CompilationUnit cu = fileParser(sourceFile);
     	Grade1A gradeA = new Grade1A(className);
     	Grade1B gradeB = new Grade1B(className);
     	Grade1C gradeC = new Grade1C(className);
     	Grade1D gradeD = new Grade1D(className);
-    	
+  	
+  	
     	cu.accept(gradeA);
     	cu.accept(gradeB);
     	cu.accept(gradeC);
     	cu.accept(gradeD);
     	
+    	
     	Inst.isGradeA = gradeA.getGrade();
     	Inst.isGradeB = gradeB.getGrade();
     	Inst.isGradeC = gradeC.getGrade();
-    	Inst.isGradeD = gradeD.getGrade() && gradeA.getGrade() && gradeB.getGrade();
+    	
+    	Inst.isGradeD = gradeD.getGrade() && gradeA.getGrade() && gradeB.getGrade(); 
+    	//grade is D is true iff public static method returning className type (gradeB),
+    	//the class has a private constructor (gradeA)
+    	//checks if only one call which is inside the if statement inside public static method.
     	
     	return Inst;
     	

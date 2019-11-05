@@ -2,28 +2,40 @@ package ecs160.visitor.astvisitors;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.ClassInstanceCreation;
-//import org.eclipse.jdt.core.dom.IfStatement;
 
 public class ConstructorCaller extends ASTVisitor {
 	private String className;
-	private boolean insideIfClassCreation;
+	private int numCalls;
 	public ConstructorCaller(String Cname) {
+		
 		className = Cname;
-		insideIfClassCreation = false;
+		numCalls = 0;
+	
 	}
 	
 	@Override
 	public boolean visit(ClassInstanceCreation node) {
 
-		//System.out.println(node.getType().toString());
+		//if the class instance created is a constructor and the type is of className
 		if (node.resolveConstructorBinding().isConstructor() && node.getType().toString().equals(className)) {
-			insideIfClassCreation = true;
+			
+			numCalls++;	//increment the numCalls
 			
 		}
+		
+		
+		
 		return false;
 	}
 	
 	public boolean getBool() {
-		return insideIfClassCreation;
+		
+		if (numCalls != 1) {	//iff the numCalls is 1, the exact one call is verified
+			return false;
+		}
+		
+		else {
+			return true;
+		}
 	}
 }

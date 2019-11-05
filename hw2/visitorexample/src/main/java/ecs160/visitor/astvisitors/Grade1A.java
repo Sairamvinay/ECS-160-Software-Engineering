@@ -8,9 +8,10 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 
 public class Grade1A extends ASTVisitor{
 	private boolean grade;
-	
+	private String className;
 	
 	public Grade1A(String Cname) {
+		className = Cname;
 		grade = false;
 	
 	}
@@ -18,17 +19,21 @@ public class Grade1A extends ASTVisitor{
 	public boolean visit(MethodDeclaration node) {
 		// TODO Auto-generated method stub
 		@SuppressWarnings("unchecked")
-		List<ASTNode> mods = (List<ASTNode>) node.modifiers();
-		if (node.isConstructor()) {
+		List<ASTNode> mods = (List<ASTNode>) node.modifiers();	//Extract all the modifiers of the class
+		
+		if (node.isConstructor() && node.getName().toString().equals(className)) { 
+			
+			//look for the constructor call
 			for (ASTNode m : mods) {
-				if (m.toString().equals("private")) {
-					grade = true;
-					return true;
+				//Check all modifiers; look for private Constructor
+				if (m.toString().equals("private")) {	//look for the private modifier to the constructor
+					grade = true;	//set grade to true once there is a private constructor for the className to check for
+					
 				}
 			}
 		}
 		
-		return false;
+		return false; //end search once done checking
 	}
 	public boolean getGrade() {
 		return grade;

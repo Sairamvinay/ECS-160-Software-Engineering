@@ -22,6 +22,7 @@ public class MethodPrinter extends ASTVisitor{
 	{
 		System.out.println("---------------------------------------------------------------------");
 		System.out.print("Method Declaration: " + node.getName() + " (");
+		@SuppressWarnings("unchecked")
 		List<SingleVariableDeclaration> params = (List<SingleVariableDeclaration>)node.parameters();
 		int i = 0;
 		for(SingleVariableDeclaration svd : params)
@@ -30,6 +31,7 @@ public class MethodPrinter extends ASTVisitor{
 			i++;
 		}
 		System.out.println(")");
+		@SuppressWarnings("unchecked")
 		List<ASTNode> mods = (List<ASTNode>) node.modifiers();
 		i = 0;
 		for (ASTNode m : mods)

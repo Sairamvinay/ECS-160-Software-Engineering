@@ -19,19 +19,19 @@ public class MethodCounter extends ASTVisitor {
 	public boolean visit(MethodDeclaration node) {
 		
 	
+		//if node is not empty
 		if (node != null){
 			
-			
+			//find method name
 			String methName = node.getName().toString();
-			methods.add(methName);
+			methods.add(methName);	//append to our list of method names
 			
 		}
 		return false;
 	}
 	
 	public List<String> getMethods(){
-		
-		
+	
 		return methods;
 	}
  

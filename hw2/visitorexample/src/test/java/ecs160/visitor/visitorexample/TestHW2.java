@@ -37,9 +37,9 @@ public class TestHW2 {
 		 * NOTE: You may need to change these paths to where you put the Homework 1
 		 * Solution.
 		 */
-		q1Grader = SingletonCheckerVisitor.setUpGrader("../ECS160HW1Fall2019_MYTEST/src/hw1/PrintManager.java", "PrintManager"); 
-		q2Grader = StateCheckerVisitor.setUpGrader("../ECS160HW1Fall2019_MYTEST/src/hw1/LibraryBook.java", "LibraryBook",
-											"../ECS160HW1Fall2019_MYTEST/src/hw1/LBState.java", "LBState");
+		q1Grader = SingletonCheckerVisitor.setUpGrader("../ECS160HW1Fall2019/src/hw1/PrintManager.java", "PrintManager"); 
+		q2Grader = StateCheckerVisitor.setUpGrader("../ECS160HW1Fall2019/src/hw1/LibraryBook.java", "LibraryBook",
+											"../ECS160HW1Fall2019/src/hw1/LBState.java", "LBState");
 		
 		
 		System.out.println(q1Grader);

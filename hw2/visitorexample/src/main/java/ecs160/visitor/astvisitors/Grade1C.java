@@ -18,29 +18,30 @@ public class Grade1C extends ASTVisitor{
 	public boolean visit(FieldDeclaration node) {
 		boolean hasPrivate= false;
 		boolean hasStatic = false;
-		boolean hasName = false;
+		
 		@SuppressWarnings("unchecked")
 		List<ASTNode> mods = (List<ASTNode>) node.modifiers();
 		
-		if(node.getType() != null && node.getType().toString().contentEquals(className)) {
-			hasName = true;
+		if(node.getType() != null && node.getType().toString().equals(className)) {	
+			//checks for variable type as className for the object  
 			
-		}
-		for (ASTNode m : mods) {
-			if (m.toString().equals("private")) {
-				hasPrivate = true;
-					
-			}
-			
-			if (m.toString().equals("static")) {
-					
-				hasStatic = true;
-				
-			}
-		}
 		
-		if (hasPrivate && hasStatic && hasName) {
-			grade = true;
+			for (ASTNode m : mods) {
+				if (m.toString().equals("private")) { //if the variable is a private variable
+					hasPrivate = true;
+					
+				}
+			
+				if (m.toString().equals("static")) {	//if the variable is a static instance variable
+					
+					hasStatic = true;
+				
+				}
+			}
+		
+			if (hasPrivate && hasStatic) {	//if private and static of className type
+				grade = true;
+			}
 		}
 		return false;
 }

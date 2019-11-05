@@ -22,33 +22,41 @@ public class Grade1B extends ASTVisitor{
 			
 			@SuppressWarnings("unchecked")
 			List<ASTNode> mods = (List<ASTNode>) node.modifiers();
-			boolean hasPublic= false;
-			boolean hasStatic = false;
-			boolean returnsType = false;
+			boolean hasPublic= false;	//checks for a public modifier inside the method
+			boolean hasStatic = false;	//checks for a static modifier inside the same method
+			
 			
 			
 			if (node.getReturnType2() != null && node.getReturnType2().toString().equals(className)) {
-				returnsType = true;
-			}
+				//checks if the returning type is className
+				
+				//look through all modifier of method which return className object
 			
-			for (ASTNode m : mods) {
-				if (m.toString().equals("public")) {
-					hasPublic = true;
+			
+				for (ASTNode m : mods) {
+					if (m.toString().equals("public")) {
 						
-				}
-				
-				if (m.toString().equals("static")) {
+						//found a public member
+						hasPublic = true;
 						
-					hasStatic = true;
+					}
+				
+					if (m.toString().equals("static")) {
+						
+						//found a static member
+						hasStatic = true;
 					
+					}
+				
 				}
-				
-			}
 					
-		
-			if(returnsType && hasPublic && hasStatic) {
-				grade = true;
+				//if this method is public static and it returns className object
 				
+				if(hasPublic && hasStatic) {	
+					
+					grade = true;
+				
+				}
 			}
 			
 			

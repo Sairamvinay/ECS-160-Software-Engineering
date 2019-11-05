@@ -21,6 +21,7 @@ public class MethodInvocationPrinter extends ASTVisitor{
 	 */
 	public boolean visit(MethodInvocation node){
 		System.out.println("-- MethodInvocation --> " + node.getName());
+		@SuppressWarnings("unchecked")
 		List<Expression> args = (List<Expression>)node.arguments();
 		int i = 0;
 		for(Expression a : args)

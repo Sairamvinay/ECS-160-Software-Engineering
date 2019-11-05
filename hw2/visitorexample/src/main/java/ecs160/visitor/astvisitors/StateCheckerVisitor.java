@@ -10,15 +10,16 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
+
 import ecs160.visitor.utilities.UtilReader;
 
 public class StateCheckerVisitor {
 
 	private boolean isGradeA;
 	private int scoreGradeB;
+	
 	private StateCheckerVisitor() {
-		isGradeA = false;
-		scoreGradeB = 0;
+		;
 	}
 	
 	
@@ -53,25 +54,30 @@ public class StateCheckerVisitor {
 		// TODO Auto-generated method stub
 		
 		StateCheckerVisitor Inst = new StateCheckerVisitor();
-		CompilationUnit cu1 = fileParser(contextPath);
-		CompilationUnit cu2 = fileParser(abstractPath);
-		MethodCounter mc1 = new MethodCounter();
-		MethodCounter mc2 = new MethodCounter();
-		CheckFields CF = new CheckFields(abstractName);
+		//2 CU units needed
+		CompilationUnit contextVisitor = fileParser(contextPath); 
+		CompilationUnit abstractVisitor = fileParser(abstractPath);	
+		
+		
+		MethodCounter contextMethodCounter = new MethodCounter(); //a visitor to count to all methods inside context
+		MethodCounter abstractMethodCounter = new MethodCounter();//a visitor to count to all methods inside abstract
+		
+		CheckFields CF = new CheckFields(abstractName);	//This visitor extracts all variables of abstractName inside contextClass
 				
-		cu1.accept(mc1);
-		cu2.accept(mc2);
-		cu1.accept(CF);
+		contextVisitor.accept(contextMethodCounter);
+		abstractVisitor.accept(abstractMethodCounter);
 		
-		String VarName = CF.getVarName();
-		Grade2B GradeB = new Grade2B(abstractName,VarName,mc2.getMethods());
+		contextVisitor.accept(CF);
 		
-		cu1.accept(GradeB);
 		
-		Grade2A GradeA = new Grade2A();
+		Grade2B GradeB = new Grade2B(CF.getVarNames(),abstractMethodCounter.getMethods()); //Create an instance of a visitor to calculate Grade B
 		
-		Inst.isGradeA = GradeA.getGrade(mc1.getMethods(),mc2.getMethods());
-		Inst.scoreGradeB = GradeB.getCount();
+		contextVisitor.accept(GradeB); //visit context Class to look into all its methods
+		
+		Grade2A GradeA = new Grade2A(); //not a visitor, it checks if intersection of abstract and context class methods is abstract class methods
+		
+		Inst.isGradeA = GradeA.getGrade(contextMethodCounter.getMethods(),abstractMethodCounter.getMethods()); //pass 2 lists of string of method names to find intersection
+		Inst.scoreGradeB = GradeB.getCount(); //get the number of matching correct calls
 		
 		
 		return Inst;
