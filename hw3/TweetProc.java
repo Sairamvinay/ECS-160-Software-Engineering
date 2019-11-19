@@ -190,20 +190,8 @@ public class TweetProc {
 		return counts;
 	}
 	
-	public static void main() {
-		Map <String, Long> Counts1 = getPerTweeterCount("/Users/sairamvinayvijayaraghavan/Downloads/cl-tweets-short-clean.csv");
-		Map <String, Long> Counts2 = getPerTaggeeCount("/Users/sairamvinayvijayaraghavan/Downloads/cl-tweets-short-clean.csv");
-		Map <String, Long> Counts3 = getTweeterURLTweetCount("/Users/sairamvinayvijayaraghavan/Downloads/cl-tweets-short-clean.csv");
-		Map <String, Long> Counts4 = getTweeterWordCount("/Users/sairamvinayvijayaraghavan/Downloads/cl-tweets-short-clean.csv","new");
-		Map <String, Double> Counts5 = getTweeterAverageVerbosity("/Users/sairamvinayvijayaraghavan/Downloads/cl-tweets-short-clean.csv");
-		Map <String, Map<String,Long>> Counts6 = getTweeterTaggeeCount("/Users/sairamvinayvijayaraghavan/Downloads/cl-tweets-short-clean.csv");
+	public static void main(String[] args) {
 		
-		System.out.println(Counts1);
-		System.out.println(Counts2);
-		System.out.println(Counts3);
-		System.out.println(Counts4);
-		System.out.println(Counts5);
-		System.out.println(Counts6);
 	
 	}
 }
